@@ -11,6 +11,7 @@ function producePrompt(mensaje,ubicacion,color){
     
 }
 
+
 //VALIDACION DE NOMBRE
 
 

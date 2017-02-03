@@ -1,6 +1,5 @@
-function validateForm()
+function validar()
 {
-     
   validateNombre();
   validateApellido();
   validateEmail();
@@ -14,9 +13,8 @@ function removeMessage(_inputID)
 	var elemento = document.getElementById(_inputID);
 
 	if(elemento.nextSibling != null)
-	{
-		elemento.parentNode.removeChild(elemento.nextSibling);
-	}
+	   elemento.parentNode.removeChild(elemento.nextSibling);
+	
 }
 
 function createMessage(_inputID, _message)
@@ -73,12 +71,14 @@ function validateNombre(evento){
 }
 
 function validateNombre(event){
-    numeros= window.event.keyCode;
-    if((numeros>=65 && numeros<=90)||numeros==8||numeros==32){
-            
-        } else{
-            event.preventDefault();
-        }
+    var nombre=document.getElementById("name").value;
+    var text="Ingrese su nombre";
+    if(nombre ==""){
+        createMessage("name", text);
+    }
+    else{
+        removeMessage("name");
+    }
 }
   
 //VALIDACION DE APELLIDO
@@ -86,7 +86,7 @@ function validateNombre(event){
 function validateApellido(event){
     var apellido=document.getElementById("lastname").value;
     var text="Ingrese su apellido";
-    if(apellido==0){
+    if(apellido==""){
         createMessage("lastname", text);
     }
     else{
@@ -128,10 +128,10 @@ function validatePass(event){
 //VALIDACION DE SELECTOR
 
 function validateSelector(event){
-    var selector= document.getElementById("select");
+    var selector= document.getElementById("select").value;
     var text="Escoger al menos un tipo de bicicleta";
     
-    if(selector.value==0){;
+    if(selector==0){;
         createMessage("select",text);
     }else{
         removeMessage("select");

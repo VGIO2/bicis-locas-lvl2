@@ -1,25 +1,56 @@
-function validateNombr(evn){
-    var nombre = document.getElementById("name").value;
-    if(nombre.length==0){
-        producePrompt("Escribe tu nombre","red");
-        return false;
-    }
+function validateForm()
+{
+     
+  validateNombre();
+  validateApellido();
+  validateEmail();
+  validatePass();
+  validateSelector();
+
 }
-function producePrompt(mensaje,ubicacion,color){
-    document.getElementById(ubicacion).innerHTML=mensaje;
-    document.getElementById(ubicacion).style.color= color;
-    
+
+function removeMessage(_inputID)
+{
+	var elemento = document.getElementById(_inputID);
+
+	if(elemento.nextSibling != null)
+	{
+		elemento.parentNode.removeChild(elemento.nextSibling);
+	}
+}
+
+function createMessage(_inputID, _message)
+{
+	var elemento = document.getElementById(_inputID);
+
+	if(elemento.nextSibling == null)
+	{
+		//El span no existe
+		var span = document.createElement('span');
+		span.innerHTML = _message;
+		elemento.parentNode.appendChild(span);
+	}else{
+		//El span ya existe
+		if(elemento.nextSibling.tagName == 'SPAN')
+		{
+			elemento.nextSibling.innerHTML = _message;
+		}else{
+			elemento.parentNode.removeChild(elemento.nextSibling);
+
+			var span = document.createElement('span');
+			span.innerHTML = _message;
+			elemento.parentNode.appendChild(span);
+		}
+	}
 }
 
 
 //VALIDACION DE NOMBRE
 
-
 function validateNombre(evento){
     
         var nombre = document.getElementById("name").value;
-    
-    
+
         var nombreArray = nombre.split("");
         var primeraLetra = nombreArray[0];
         var mayuscula = primeraLetra.toUpperCase();
@@ -41,8 +72,7 @@ function validateNombre(evento){
    
 }
 
-
-function validateName(event){
+function validateNombre(event){
     numeros= window.event.keyCode;
     if((numeros>=65 && numeros<=90)||numeros==8||numeros==32){
             
@@ -50,85 +80,62 @@ function validateName(event){
             event.preventDefault();
         }
 }
-
   
 //VALIDACION DE APELLIDO
 
 function validateApellido(event){
-    
-        var apellido = document.getElementById("lastname").value;
-        
-        var apellidoArray = apellido.split("");
-        var primeraLetra = apellidoArray[0];
-        var mayuscula = primeraLetra.toUpperCase();
-        var separacion = false;
-      
-        for(var i=1;i<apellidoArray.length;i++){
-            if(separacion)
-            {    
-                mayuscula+= apellidoArray[i].toUpperCase();
-                separacion = false;
-            }
-            else
-                mayuscula+=apellidoArray[i];
-            if(apellidoArray[i] == " ")
-                separacion = true;
-            
-        }
-       document.getElementById("lastname").value = mayuscula; 
+    var apellido=document.getElementById("lastname").value;
+    var text="Ingrese su apellido";
+    if(apellido==0){
+        createMessage("lastname", text);
+    }
+    else{
+        removeMessage("lastname");
+    }
 }
-
-function validateLastname(event){
-    numeros= window.event.keyCode;
-    if((numeros>=65 && numeros<=90)||numeros==8||numeros==32){
-            
-        } else{
-            event.preventDefault();
-        }
-}
-
 
 //VALIDACION DE EMAIL.
     
-function validateEmail(evento){
+function validateEmail(event){
     
-  var email = document.getElementById("email").value;
-  var correo = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-   
- 
-    if(!correo.test(email)){
-      alert ("Correo inválido. Ejemplo: name@enlace.ku");
-     
+  var email = document.getElementById("email");
+  var text ="Correo inválido. Ejemplo: name@enlace.xy";
+    
+    if(/([a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]+)/g.test(email.value)){
+        removeMessage("email");
+        
     }else{
-      return false;  
+        if(email.value.length>=0){
+            createMessage("email",text);
+        }
     }
 }
 
 //VALIDACION DE CONTRASEÑA
-    
-document.getElementById("input-password").setAttribute("minlength","6");
 
-  function validatePass(evento){
-      var pass=document.getElementById("input-password").value;
+function validatePass(event){
+    
+      var pass=document.getElementById("input-password");
+      var text= "Ingrese su contraseña";
       
-      if(pass==="123456"||pass==="098754"||pass==="password"){
-          alert("Password ingresado no válido");
-          return false;
+      if(pass.value==="123456"||pass.value==="098754"||pass.value.length<=6){
+         createMessage("input-password",text);
+      }else{
+          removeMessage("input-password");
       }
   }
 
-//VALIDACIONN DE SELECTOR
+//VALIDACION DE SELECTOR
 
-function validateSelector(evento){
-    var selector= document.querySelector("select").value;
+function validateSelector(event){
+    var selector= document.getElementById("select");
+    var text="Escoger al menos un tipo de bicicleta";
     
-    if(selector==0){
-        alert("Tienes que seleccionar una opcion");
-        
+    if(selector.value==0){;
+        createMessage("select",text);
+    }else{
+        removeMessage("select");
     }
 }
 
-function validateForm(){
-    validateSelector();
-}
 

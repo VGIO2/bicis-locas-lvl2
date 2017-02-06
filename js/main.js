@@ -99,13 +99,14 @@ function validateApellido(event){
     
 function validateEmail(event){
     
-  var email = document.getElementById("email").value;
+  var email = document.getElementById("email");
   var text ="Correo inválido. Ejemplo: name@enlace.xy";
     
     if(/([a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]+)/g.test(email)){
         removeMessage("email");
         
     }else{
+        
         if(email.value.length>=0){
             createMessage("email",text);
         }

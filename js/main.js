@@ -38,6 +38,7 @@ function createMessage(_inputID, _message)
 			var span = document.createElement('span');
 			span.innerHTML = _message;
 			elemento.parentNode.appendChild(span);
+            
 		}
 	}
 }
@@ -98,10 +99,10 @@ function validateApellido(event){
     
 function validateEmail(event){
     
-  var email = document.getElementById("email");
+  var email = document.getElementById("email").value;
   var text ="Correo inválido. Ejemplo: name@enlace.xy";
     
-    if(/([a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]+)/g.test(email.value)){
+    if(/([a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]+)/g.test(email)){
         removeMessage("email");
         
     }else{

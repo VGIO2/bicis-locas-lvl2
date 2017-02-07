@@ -43,38 +43,10 @@ function createMessage(_inputID, _message)
 	}
 }
 
-
-//VALIDACION DE NOMBRE
-
-function validateNombre(evento){
-    
-        var nombre = document.getElementById("name").value;
-
-        var nombreArray = nombre.split("");
-        var primeraLetra = nombreArray[0];
-        var mayuscula = primeraLetra.toUpperCase();
-        var separacion= false;
-      
-        for(var i=1; i<nombreArray.length; i++){
-            if(separacion)
-            {    
-                mayuscula+= nombreArray[i].toUpperCase();
-                
-            }
-            else
-                mayuscula+=nombreArray[i];
-            if(nombreArray[i] == " ")
-                separacion= true;
-            
-        }
-       document.getElementById("name").value = mayuscula;
-   
-}
-
 function validateNombre(event){
     var nombre=document.getElementById("name").value;
     var text="Ingrese su nombre";
-    if(nombre ==""){
+    if(nombre==""){
         createMessage("name", text);
     }
     else{
@@ -94,7 +66,6 @@ function validateApellido(event){
         removeMessage("lastname");
     }
 }
-
 //VALIDACION DE EMAIL.
     
 function validateEmail(event){
@@ -102,13 +73,14 @@ function validateEmail(event){
   var email = document.getElementById("email");
   var text ="Correo inválido. Ejemplo: name@enlace.xy";
     
-    if(/([a-zA-Z]+[@][a-zA-Z]+[.][a-zA-Z]+)/g.test(email)){
-        removeMessage("email");
+    if(/([a-zA-Z0-9(-_.)]+[@][a-zA-Z0-9]+[.][a-zA-Z]+)/g.test(email.value)){
+          removeMessage("email");
         
     }else{
         
         if(email.value.length>=0){
-            createMessage("email",text);
+           
+           createMessage("email",text);
         }
     }
 }
